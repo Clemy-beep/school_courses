@@ -10,3 +10,11 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+import $ from 'jquery';
+
+import setRoles from './controllers/roles.js';
+
+$(document).ready(function() {
+    setRoles();
+});

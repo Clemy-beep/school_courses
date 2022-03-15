@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block body %}
+	<h1>Sudents index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.email }}</td>
+					<td id="roles">
+						<span>{{ "ROLE_ADMIN" in user.roles ? "Admin" : "ROLE_MENTOR" in user.roles ?"Mentor" : "Student"}}</span>
+					</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.lastname }}</td>
+					<td>
+						{% if "ROLE_ADMIN" not in user.roles %}
+							<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+							<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+						{% else %}
+							<a href="{{ path('app_admin_show', {'id': user.id}) }}">show</a>
+							<a href="{{ path('app_admin_edit', {'id': user.id}) }}">edit</a>
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{{ path('app_user_new') }}">Create new user</a>
+	<a href="{{ path('app_admin_new') }}">Create new admin</a>
+	<a href="{{path('app_home')}}">Back to Home</a>
+{% endblock %}

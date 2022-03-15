@@ -5,3 +5,9 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+app_home:
+    path: /
+    controller: App\Controller\AppController
+    methods: GET
+    
