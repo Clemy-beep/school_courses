@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block body %}
+	<h1>Sudents index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for mentor in mentors %}
+				<tr>
+					<td>{{ mentor.email }}</td>
+					<td>
+						<span class="roles">{{ "ROLE_ADMIN" in mentor.roles ? "Admin" : "ROLE_MENTOR" in mentor.roles ? "Mentor" : "Student"}}</span>
+					</td>
+					<td>{{ mentor.firstname }}</td>
+					<td>{{ mentor.lastname }}</td>
+					<td>
+						<a href="{{ path('app_user_show', {'id': mentor.id}) }}">show</a>
+						<a href="{{ path('app_user_edit', {'id': mentor.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{{ path('app_user_new') }}">Create new user</a>
+	<a href="{{ path('app_admin_new') }}">Create new admin</a>
+	<a href="{{ path('app_user_index') }}">back to list</a>
+	<a href="{{path('app_home')}}">Back to Home</a>
+{% endblock %}

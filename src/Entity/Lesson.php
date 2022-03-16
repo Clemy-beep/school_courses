@@ -135,6 +135,6 @@ class Lesson
 
     public function __toString(): string
     {
-        return $this->name . ' at ' . $this->start->format('d-m-Y H:i') . ' to ' . $this->end->format('d-m-Y H:i');
+        return $this->name;
     }
 }

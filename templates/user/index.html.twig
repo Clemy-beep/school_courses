@@ -20,8 +20,8 @@
 			{% for user in users %}
 				<tr>
 					<td>{{ user.email }}</td>
-					<td id="roles">
-						<span>{{ "ROLE_ADMIN" in user.roles ? "Admin" : "ROLE_MENTOR" in user.roles ?"Mentor" : "Student"}}</span>
+					<td>
+						<span class="roles">{{ "ROLE_ADMIN" in user.roles ? "Admin" : "ROLE_MENTOR" in user.roles ?"Mentor" : "Student"}}</span>
 					</td>
 					<td>{{ user.firstname }}</td>
 					<td>{{ user.lastname }}</td>
@@ -44,5 +44,6 @@
 	</table>
 	<a href="{{ path('app_user_new') }}">Create new user</a>
 	<a href="{{ path('app_admin_new') }}">Create new admin</a>
+	<a href="{{ path('app_mentor_index') }}">See all mentors</a>
 	<a href="{{path('app_home')}}">Back to Home</a>
 {% endblock %}

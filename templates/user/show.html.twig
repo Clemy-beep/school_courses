@@ -18,13 +18,9 @@
 			</tr>
 			<tr>
 				<th>Roles</th>
-				<td id="roles">
-					<span>{{ user.roles ? "ROLE_MENTOR" in user.roles ? "Mentor" : "Student" }}</span>
+				<td>
+					<span  class="roles">{{ user.roles ? "ROLE_MENTOR" in user.roles ? "Mentor" : "Student" }}</span>
 				</td>
-			</tr>
-			<tr>
-				<th>Password</th>
-				<td>{{ user.password }}</td>
 			</tr>
 			<tr>
 				<th>Firstname</th>

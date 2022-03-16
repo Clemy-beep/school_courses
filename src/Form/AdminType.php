@@ -13,13 +13,11 @@ class AdminType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('firstname')
             ->add('lastname')
             ->add('badge_num')
             ->add('mentor')
-            ->add('lessons')
         ;
     }
 

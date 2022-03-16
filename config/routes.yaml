@@ -10,4 +10,8 @@ app_home:
     path: /
     controller: App\Controller\AppController
     methods: GET
-    
+
+app_mentor_index:
+    path: /mentor
+    controller: App\Controller\UserController::mentorIndex
+    methods: GET

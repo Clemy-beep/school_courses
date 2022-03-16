@@ -32,11 +32,22 @@ class UserController extends AbstractController
         ]
     ];
 
+    public function getUserRoles(User $user)
+    {
+        if ($user->getMentor() !== null && !in_array('ROLE_ADMIN', $user->getRoles())) {
+            $user->setRoles(['ROLE_MENTOR', 'ROLE_USER']);
+        }
+    }
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+        $users = $userRepository->findAll();
+        foreach ($users as $key => $user) {
+            $this->getUserRoles($user);
+        }
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
             "pages" => $this->pages
         ]);
     }
@@ -63,6 +74,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
+        $this->getUserRoles($user);
         return $this->render('user/show.html.twig', [
             'user' => $user,
             "pages" => $this->pages
@@ -95,5 +107,21 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/mentor', name: 'app_mentor_index', methods: ['GET'])]
+    public function mentorIndex(UserRepository $userRepository): Response
+    {
+        $mentors = $userRepository->findAll();
+        foreach ($mentors as $key => $mentor) {
+            $this->getUserRoles($mentor);
+            if (!in_array('ROLE_MENTOR', $mentor->getRoles())) {
+                unset($mentors[$key]);
+            }
+        }
+        return $this->render('user/mentor.html.twig', [
+            'mentors' => $mentors,
+            'pages' => $this->pages
+        ]);
     }
 }

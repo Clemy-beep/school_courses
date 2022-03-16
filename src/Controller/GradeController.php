@@ -89,7 +89,7 @@ class GradeController extends AbstractController
     #[Route('/{id}', name: 'app_grade_delete', methods: ['POST'])]
     public function delete(Request $request, Grade $grade, GradeRepository $gradeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$grade->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $grade->getId(), $request->request->get('_token'))) {
             $gradeRepository->remove($grade);
         }
 

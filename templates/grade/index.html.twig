@@ -12,6 +12,7 @@
 				<th>Id</th>
 				<th>Grade</th>
 				<th>Student</th>
+				<th>Exam</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -20,7 +21,8 @@
 				<tr>
 					<td>{{ grade.id }}</td>
 					<td>{{ grade.grade }}</td>
-					<td>{{grade.user}}</td>
+					<td>{{ grade.user }}</td>
+					<td>{{ grade.exam }}</td>
 					<td>
 						<a href="{{ path('app_grade_show', {'id': grade.id}) }}">show</a>
 						<a href="{{ path('app_grade_edit', {'id': grade.id}) }}">edit</a>

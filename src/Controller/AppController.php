@@ -19,6 +19,14 @@ class AppController extends AbstractController
         'lessons' => [
             'title' => "Lessons",
             'url' => '/lesson/'
+        ],
+        'grades' => [
+            'title' => "Grades",
+            'url' => '/grade/'
+        ],
+        'exams' => [
+            'title' => "Exams",
+            'url' => '/exam/'
         ]
     ];
     public function __invoke(Request $request)
