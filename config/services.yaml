@@ -21,4 +21,8 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
+    App\Message\UserNotificationMessageHandler:
+        tags: [messenger.message_handler]
+
+        
     # please note that last definitions always *replace* previous ones
