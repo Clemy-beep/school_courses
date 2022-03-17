@@ -12,22 +12,14 @@ class AppController extends AbstractController
     private string $method;
     private string $route;
     private $pages = [
-        'users' => [
-            'title' => "Users",
-            'url' => '/user/'
+        'login' => [
+            'title' => "Login",
+            'url' => '/login/'
         ],
-        'lessons' => [
-            'title' => "Lessons",
-            'url' => '/lesson/'
+        'register' => [
+            'title' => "Register",
+            'url' => '/register/'
         ],
-        'grades' => [
-            'title' => "Grades",
-            'url' => '/grade/'
-        ],
-        'exams' => [
-            'title' => "Exams",
-            'url' => '/exam/'
-        ]
     ];
     public function __invoke(Request $request)
     {

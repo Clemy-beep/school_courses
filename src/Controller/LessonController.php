@@ -29,6 +29,10 @@ class LessonController extends AbstractController
         'exams' => [
             'title' => "Exams",
             'url' => '/exam/'
+        ],
+        'logout' => [
+            'title' => "Log out",
+            'url' => '/logout'
         ]
     ];
     #[Route('/', name: 'app_lesson_index', methods: ['GET'])]

@@ -29,6 +29,10 @@ class GradeController extends AbstractController
         'exams' => [
             'title' => "Exams",
             'url' => '/exam/'
+        ],
+        'logout' => [
+            'title' => "Log out",
+            'url' => '/logout'
         ]
     ];
     #[Route('/', name: 'app_grade_index', methods: ['GET'])]

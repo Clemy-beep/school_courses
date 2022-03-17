@@ -29,6 +29,10 @@ class AdminController extends AbstractController
         'exams' => [
             'title' => "Exams",
             'url' => '/exam/'
+        ],
+        'logout' => [
+            'title' => "Log out",
+            'url' => '/logout'
         ]
     ];
  

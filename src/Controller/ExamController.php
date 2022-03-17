@@ -29,6 +29,10 @@ class ExamController extends AbstractController
         'exams' => [
             'title' => "Exams",
             'url' => '/exam/'
+        ],
+        'logout' => [
+            'title' => "Log out",
+            'url' => '/logout'
         ]
     ];
     #[Route('/', name: 'app_exam_index', methods: ['GET'])]
