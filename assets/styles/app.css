@@ -88,6 +88,15 @@ table {
     text-align: center;
 }
 
+.roles {
+    font-size: 16px;
+    font-weight: normal;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content
+}
+
 #admin-badge {
     background-color: rgb(241, 211, 211);
     border-radius: 32px;
@@ -104,4 +113,18 @@ table {
     border-radius: 32px;
     padding: 0.3em;
     background-color: rgb(187, 227, 206);
+}
+
+#avatar {
+    width: 44px;
+    height: 44px;
+    clip-path: ellipse(50% 50%);
+    background-color: #ecdff5;
+}
+
+#user-basics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em
 }

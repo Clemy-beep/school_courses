@@ -13,6 +13,7 @@
 				<th>Roles</th>
 				<th>Firstname</th>
 				<th>Lastname</th>
+				<th>Avatar</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -25,6 +26,13 @@
 					</td>
 					<td>{{ user.firstname }}</td>
 					<td>{{ user.lastname }}</td>
+					<td>
+						{% if user.avatar %}
+							<img id="avatar" src="{{asset('uploads/avatars/'~user.avatar)}}" alt="avatar"/>
+						{% else %}
+							<img id="avatar" src="{{asset('uploads/avatars/tiny-alien-asset.jpg')}}" alt="avatar"/>
+						{% endif %}
+					</td>
 					<td>
 						{% if "ROLE_ADMIN" not in user.roles %}
 							<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>

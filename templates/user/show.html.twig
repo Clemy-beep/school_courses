@@ -4,34 +4,22 @@
 {% endblock %}
 
 {% block body %}
-	<h1>User</h1>
-
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ user.id }}</td>
-			</tr>
-			<tr>
-				<th>Email</th>
-				<td>{{ user.email }}</td>
-			</tr>
-			<tr>
-				<th>Roles</th>
-				<td>
-					<span  class="roles">{{ user.roles ? "ROLE_MENTOR" in user.roles ? "Mentor" : "Student" }}</span>
-				</td>
-			</tr>
-			<tr>
-				<th>Firstname</th>
-				<td>{{ user.firstname }}</td>
-			</tr>
-			<tr>
-				<th>Lastname</th>
-				<td>{{ user.lastname }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="user-basics">
+		{% if user.avatar %}
+			<img id="avatar" src="{{asset('uploads/avatars/'~user.avatar)}}" alt="avatar"/>
+		{% else %}
+			<img id="avatar" src="{{asset('uploads/avatars/tiny-alien-asset.jpg')}}" alt="avatar"/>
+		{% endif %}
+		<h1>
+			{{user.firstname}}
+			{{user.lastname}}
+		</h1>
+	</div>
+	<span class="roles">{{ user.roles ? "ROLE_MENTOR" in user.roles ? "Mentor" : "Student" }}</span>
+	<h2>Email</h2>
+	<p>
+		{{user.email}}
+	</p>
 
 	<a href="{{ path('app_user_index') }}">back to list</a>
 

@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Helpers\MessageHelper;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -53,6 +53,25 @@ class UserController extends AbstractController
         }
     }
 
+    public function setUserAvatar(User $user, mixed $avatarFile, SluggerInterface $slugger)
+    {
+        if ($avatarFile) {
+            $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFileName = $slugger->slug($originalFilename);
+            $newFileName = $safeFileName . '-' . uniqid() . '.' . $avatarFile->guessExtension();
+
+            try {
+                $avatarFile->move(
+                    $this->getParameter('avatar_directory'),
+                    $newFileName
+                );
+            } catch (FileException $e) {
+                var_dump($e);
+            }
+            $user->setAvatar($newFileName);
+        }
+    }
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -67,7 +86,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, SluggerInterface $slugger): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -76,6 +95,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hashpwd = $this->encoder->hashPassword($user, $user->getPassword());
             $user->setPassword($hashpwd);
+            $avatarFile = $form->get('avatar')->getData();
+            $this->setUserAvatar($user, $avatarFile, $slugger);
             $userRepository->add($user);
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -98,12 +119,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->get('avatar')->getData();
+            $this->setUserAvatar($user, $avatarFile, $slugger);
             $userRepository->add($user);
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }

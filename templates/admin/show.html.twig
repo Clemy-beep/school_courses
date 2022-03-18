@@ -4,36 +4,22 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Admin</h1>
-
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ admin.id }}</td>
-			</tr>
-			<tr>
-				<th>Email</th>
-				<td>{{ admin.email }}</td>
-			</tr>
-			<tr>
-				<th>Roles</th>
-				<td><span class="roles">{{ admin.roles ? "Admin" : ''}}</span></td>
-			</tr>
-			<tr>
-				<th>Firstname</th>
-				<td>{{ admin.firstname }}</td>
-			</tr>
-			<tr>
-				<th>Lastname</th>
-				<td>{{ admin.lastname }}</td>
-			</tr>
-			<tr>
-				<th>Badge_num</th>
-				<td>{{ admin.badgeNum }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="user-basics">
+		{% if admin.avatar %}
+			<img id="avatar" src="{{asset('uploads/avatars/'~admin.avatar)}}" alt="avatar"/>
+		{% else %}
+			<img id="avatar" src="{{asset('uploads/avatars/tiny-alien-asset.jpg')}}" alt="avatar"/>
+		{% endif %}
+		<h1>
+			{{admin.firstname}}
+			{{admin.lastname}}
+		</h1>
+	</div>
+	<span class="roles">{{ admin.roles ? "Admin" : ''}}</span>
+	<h2>Email</h2>
+	<p>
+		{{admin.email}}
+	</p>
 
 	<a href="{{ path('app_user_index') }}">back to list</a>
 

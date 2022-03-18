@@ -1,17 +1,21 @@
 controllers:
-    resource: ../src/Controller/
-    type: annotation
+  resource: ../src/Controller/
+  type: annotation
 
 kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+  resource: ../src/Kernel.php
+  type: annotation
 
 app_home:
-    path: /
-    controller: App\Controller\AppController
-    methods: GET
+  path: /
+  controller: App\Controller\AppController
+  methods: GET
 
 app_mentor_index:
-    path: /mentor
-    controller: App\Controller\UserController::mentorIndex
-    methods: GET
+  path: /mentor
+  controller: App\Controller\UserController::mentorIndex
+  methods: GET
+
+app_assets:
+  path: /public/uploads/avatars
+  methods: GET

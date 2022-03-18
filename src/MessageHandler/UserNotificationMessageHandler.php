@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Message;
+namespace App\MessageHandler;
 
 use App\Helpers\MessageHelper;
 use App\Message\UserNotificationMessage;
